@@ -117,6 +117,13 @@ This approach ensures fast user responses and scalable background processing for
 - **Recipe Service**: Manages recipe CRUD, image uploads, search/filter, reporting, nutrition, and category management (including creating, editing, deleting, and listing recipe categories for organizing and filtering recipes)
 - **Interaction Service**: Manages comments and likes on recipes
 
+### Worker Microservices (Asynchronous Processing)
+- **Image Processor**: Handles image resizing, optimization, and metadata extraction
+- **Nutrition Worker**: Processes nutrition analysis via Nutritionix API
+- **Search Indexer**: Updates Elasticsearch indices for recipe search
+- **Notification Worker**: Handles email and push notifications
+- **Moderation Worker**: Processes user/recipe reports and moderation tasks
+
 ---
 
 ## Use Case Diagrams
