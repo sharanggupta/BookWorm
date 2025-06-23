@@ -54,7 +54,7 @@ Frontend + Microservice Backend
 Mono-repo (all components in one repository)
 
 ## Branching Strategy
-Feature Branching
+Trunk-Based Development
 
 ## Deployment Model
 - Local (Docker Compose, Helm for Kubernetes)
