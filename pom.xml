@@ -28,6 +28,11 @@
         <module>services/user-service</module>
         <module>services/recipe-service</module>
         <module>services/interaction-service</module>
+        <module>workers/image-processor</module>
+        <module>workers/nutrition-worker</module>
+        <module>workers/search-indexer</module>
+        <module>workers/notification-worker</module>
+        <module>workers/moderation-worker</module>
     </modules>
 
     <dependencyManagement>

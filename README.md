@@ -93,6 +93,23 @@ See [Manual Test Procedure](docs/deployment/MANUAL_TEST_PROCEDURE.md)
 ## System Architecture
 
 ### Architecture Overview
+
+GreenForked uses an event-driven microservices architecture with both synchronous and asynchronous processing. 
+
+- **Synchronous:** User authentication, CRUD operations, and real-time interactions are handled directly by the core services (User, Recipe, Interaction).
+- **Asynchronous:** Time-consuming or external operations are handled via a Redis-based message queue and background workers for improved scalability and user experience.
+
+**Asynchronous processing is powered by:**
+- **Redis Queue:** Central message broker for background jobs
+- **Background Workers:**
+  - **Image Processor:** Handles image resizing, optimization, and metadata extraction
+  - **Nutrition Worker:** Processes nutrition analysis via Nutritionix API
+  - **Search Indexer:** Updates Elasticsearch indices for recipe search
+  - **Notification Worker:** Sends email and push notifications
+  - **Moderation Worker:** Processes user/recipe reports and moderation tasks
+
+This approach ensures fast user responses and scalable background processing for heavy or external tasks.
+
 ![Architecture Diagram](diagrams/architecture-overview.png)
 
 ### Microservices
