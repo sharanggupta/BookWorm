@@ -6,6 +6,7 @@ entity User {
   image : String
   bio : String
   social : String
+  authProvider : String
 }
 entity Recipe {
   *id : UUID
@@ -15,12 +16,12 @@ entity Recipe {
   serving : Int
   description : String
   images : String
-  ingredients : String
-  instructions : String
+  ingredients : Text // or JSON
+  steps : Text // or JSON
   calories : Float
+  nutritionJson : Text // Nutritionix API response
   owner : UUID
   categoryID : UUID
-  typename : String
   isArchived : Boolean
 }
 entity Comment {
@@ -28,30 +29,42 @@ entity Comment {
   recipeID : UUID
   userID : UUID
   content : String
+  createdAt : DateTime
 }
 entity Category {
   *id : UUID
   name : String
 }
-entity Report {
+entity Like {
   *id : UUID
   userID : UUID
-  reportedUsers : String
-  count : Int
-  typename : String
+  recipeID : UUID
+  createdAt : DateTime
 }
-entity Message {
+entity RecipeReport {
   *id : UUID
   recipeID : UUID
-  userID : UUID
-  message : String
-  isRead : Boolean
+  reporterUserID : UUID
+  reason : String
+  status : String
+  createdAt : DateTime
+}
+entity UserReport {
+  *id : UUID
+  reportedUserID : UUID
+  reporterUserID : UUID
+  reason : String
+  status : String
+  createdAt : DateTime
 }
 User ||--o{ Recipe : owns
 User ||--o{ Comment : writes
-User ||--o{ Message : receives
+User ||--o{ Like : likes
+User ||--o{ RecipeReport : reports
+User ||--o{ UserReport : reports
 Recipe ||--o{ Comment : has
-Recipe ||--o{ Message : has
+Recipe ||--o{ Like : liked
+Recipe ||--o{ RecipeReport : reported
 Recipe }o--|| Category : categorized
-Report }o--|| User : reports
+UserReport }o--|| User : reported
 @enduml 

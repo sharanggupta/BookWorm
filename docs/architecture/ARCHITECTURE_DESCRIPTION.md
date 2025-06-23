@@ -5,9 +5,8 @@ GreenForked is a microservices-based vegan recipe platform, designed for scalabi
 
 ## Microservices
 - **User Service**: Handles authentication (Google OAuth), user registration, profile management, and admin actions.
-- **Recipe Service**: Manages recipe CRUD, image uploads, search/filter, and reporting.
+- **Recipe Service**: Manages recipe CRUD, image uploads, search/filter, reporting, nutrition, and category management (recipes can be organized and filtered by category; admins can manage the list of categories).
 - **Interaction Service**: Manages comments and likes on recipes.
-- **Category Service**: Handles recipe categories (CRUD, admin only).
 
 ## Data Storage
 - **PostgreSQL**: Each service owns its tables.
@@ -32,24 +31,24 @@ GreenForked is a microservices-based vegan recipe platform, designed for scalabi
 - Error/Alert: #e17055
 
 ## Architecture Diagram
-See [../architecture-overview.png](../architecture-overview.png)
+See [../../diagrams/architecture-overview.png](../../diagrams/architecture-overview.png)
 
 ## Use Case Diagram
-See [../use-case-overview.png](../use-case-overview.png)
+See [../../diagrams/use-case-overview.png](../../diagrams/use-case-overview.png)
 
 ## ER Diagram
-See [../er-diagram.png](../er-diagram.png)
+See [../../diagrams/er-diagram.png](../../diagrams/er-diagram.png)
 
 ## 🖼️ Key Diagrams
 
 **Architecture Overview**
 
-![Architecture Diagram](../architecture-overview.png)
+![Architecture Diagram](../../diagrams/architecture-overview.png)
 
 **Use Case Overview**
 
-![Use Case Diagram](../use-case-overview.png)
+![Use Case Diagram](../../diagrams/use-case-overview.png)
 
 **ER Diagram**
 
-![ER Diagram](../er-diagram.png) 
+![ER Diagram](../../diagrams/er-diagram.png) 

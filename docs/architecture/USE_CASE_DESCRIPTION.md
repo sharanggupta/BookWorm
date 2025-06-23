@@ -17,4 +17,4 @@
 - Admin: Ban/warn/delete users, delete/moderate recipes, manage categories
 
 ## Use Case Diagram
-- See [../use-case-overview.png](../use-case-overview.png) 
+- See [../../diagrams/use-case-overview.png](../../diagrams/use-case-overview.png) 

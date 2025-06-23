@@ -2,23 +2,25 @@
 !define RECTANGLE class
 RECTANGLE ReactFrontend as "React Frontend\n(Tailwind, Google OAuth)"
 RECTANGLE UserService as "User Service\n(Auth, Profile, Admin)"
-RECTANGLE RecipeService as "Recipe Service\n(Recipes, Images, Search, Report)"
+RECTANGLE RecipeService as "Recipe Service\n(Recipes, Images, Search, Report, Categories)"
 RECTANGLE InteractionService as "Interaction Service\n(Comments, Likes)"
-RECTANGLE CategoryService as "Category Service\n(Categories)"
 RECTANGLE PostgreSQL as "PostgreSQL"
 RECTANGLE MediaStorage as "S3/Cloudinary\n(Images Only)"
+RECTANGLE GoogleOAuth as "Google OAuth"
+RECTANGLE NutritionixAPI as "Nutritionix API"
 
 ReactFrontend --> UserService : REST API
 ReactFrontend --> RecipeService : REST API
 ReactFrontend --> InteractionService : REST API
-ReactFrontend --> CategoryService : REST API
+ReactFrontend --> GoogleOAuth : OAuth Login
 
 UserService --> PostgreSQL
 RecipeService --> PostgreSQL
 InteractionService --> PostgreSQL
-CategoryService --> PostgreSQL
+UserService --> GoogleOAuth : Token Verification
 
 RecipeService --> MediaStorage : Image Upload
 ReactFrontend --> MediaStorage : Image Fetch
+RecipeService --> NutritionixAPI : Nutrition Analysis
 
 @enduml 

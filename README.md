@@ -1,80 +1,97 @@
 # GreenForked 🌱
 
-> A modern vegan recipe platform for sharing, discovering, and engaging with plant-based recipes.
+## System Name
+GreenForked
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+## Contributors
+- Sharang Gupta ([GitHub](https://github.com/sharanggupta))
 
----
+## License
+MIT License – see [LICENSE](LICENSE)
 
-## About GreenForked
-GreenForked is a scalable, modern web application for vegan food lovers, bloggers, and the plant-based community. Users can upload, browse, like, and comment on vegan recipes, with a clean, mobile-friendly interface and robust backend.
+## Background Context
+This is a TDD Sandbox Project created as part of the Optivem Journal TDD in Legacy Code series by Valentina Jemuović. The goal is to practice TDD and Hexagonal Architecture in a safe, simulated environment before applying these practices to real-life projects.  
+- [Optivem Journal](https://journal.optivem.com/)
+- [Sandbox Project Dashboard](https://journal.optivem.com/p/sandbox-project-dashboard)
 
----
+## Project Board
+- [GitHub Project Board](https://github.com/users/sharanggupta/projects/2)
 
-## 🟢 Microservices Architecture
-- **User Service**: Registration, Google OAuth, profile management, admin actions
-- **Recipe Service**: Recipe CRUD, image upload, search/filter, reporting
-- **Interaction Service**: Comments, likes, user engagement
-- **Category Service**: Category management
-
----
-
-## 🖥️ Tech Stack
-- **Frontend**: React (TypeScript), Tailwind CSS, Google OAuth
-- **Backend**: Spring Boot (Java 17+), PostgreSQL, REST APIs
-- **Media Storage**: S3/Cloudinary (images only)
-- **Deployment**: Docker, Kubernetes, GitHub Actions
-
----
-
-## 🎨 Color Palette & Branding
-- **Primary Green**: #2ecc71
-- **Accent Green**: #27ae60
-- **Background**: #ffffff
-- **Text**: #222222
-- **Subtle Gray**: #f7f7f7
-- **CTA/Highlight**: #00b894
-- **Error/Alert**: #e17055
-
----
-
-## 🚀 Features
+## Use Cases
 - Register/login with Google
-- Create, edit, delete vegan recipes (images only)
+- Create, edit, delete vegan recipes
 - Browse, search, and filter recipes
 - Like and comment on recipes
 - User profiles with bio, image, social links
 - Admin moderation (ban, warn, delete users/recipes)
-- Report inappropriate recipes
-- Category management
+- Report inappropriate recipes and users
+- Category management (recipes can be organized and filtered by category; admins can manage the list of categories)
+- Nutrition analysis (calorie calculation via Nutritionix API)
 
----
+**Actors:** Visitor, User, Blogger, Admin  
+**[Use Case Diagram](diagrams/use-case-overview.png)**
 
-## 📦 Project Structure
-```
-GreenForked/
-├── services/
-│   ├── user-service/
-│   ├── recipe-service/
-│   ├── interaction-service/
-│   └── category-service/
-├── frontend/
-├── deployment/
-├── diagrams/
-├── docs/
-└── ...
-```
+## External Systems
+- Google OAuth ([Google Identity](https://developers.google.com/identity)) – Authentication
+- Cloudflare Images ([Cloudflare Images](https://www.cloudflare.com/products/images/)) – Media Storage
+- Nutritionix API ([nutritionix.com](https://www.nutritionix.com/business/api)) – Nutrition analysis
 
----
+## System Architecture Style
+Frontend + Microservice Backend
 
-## 📝 Documentation
-- [Architecture & Use Cases](docs/architecture/ARCHITECTURE_DESCRIPTION.md)
+## Architecture Diagram
+![Architecture Diagram](diagrams/architecture-overview.png)
+
+## Tech Stack
+- **Frontend:** React (TypeScript), Tailwind CSS
+- **Backend:** Spring Boot (Java 17+), PostgreSQL, REST APIs
+- **Media Storage:** Cloudflare Images
+- **Nutrition Analysis:** Nutritionix API
+- **Deployment:** Docker, Kubernetes, GitHub Actions
+
+## Repository Strategy
+Mono-repo (all components in one repository)
+
+## Branching Strategy
+Feature Branching
+
+## Deployment Model
+- Local (Docker Compose, Helm for Kubernetes)
+- [UAT/Production planned for future]
+
+## Component Repositories
+- This is a mono-repo. All services and frontend are in this repository.
+
+## Tickets
+- User stories and tasks are tracked in the [Project Board](https://github.com/users/sharanggupta/projects/2).
+
+## Environments
+- Local (Docker Compose)
+- [UAT/Production planned for future]
+
+## Manual Deployment
+See [Deployment Guide](docs/deployment/DEPLOYMENT_GUIDE.md)
+
+## Manual Testing
+See [Manual Test Procedure](docs/deployment/MANUAL_TEST_PROCEDURE.md)
+
+## Documentation
+- [Architecture Description](docs/architecture/ARCHITECTURE_DESCRIPTION.md)
+- [Use Case Description](docs/architecture/USE_CASE_DESCRIPTION.md)
 - [Deployment Guide](docs/deployment/DEPLOYMENT_GUIDE.md)
 - [Manual Test Procedure](docs/deployment/MANUAL_TEST_PROCEDURE.md)
 
+## Internal Project Demo
+(Skipped for individual project)
+
 ---
 
-## 🖼️ Key Diagrams
+## About
+GreenForked is a scalable, modern web application for vegan food lovers, bloggers, and the plant-based community. Users can upload, browse, like, and comment on vegan recipes, with a clean, mobile-friendly interface and robust backend.
+
+---
+
+## Key Diagrams
 
 **Architecture Overview**
 
@@ -90,15 +107,11 @@ GreenForked/
 
 ---
 
-## 🗂️ Contributing
-- See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines
-- Use the color palette and branding for all UI/UX
+*Built with ❤️ by the GreenForked community*
 
----
+## Microservices
+- **User Service**: Handles authentication (Google OAuth), user registration, profile management, and admin actions
+- **Recipe Service**: Manages recipe CRUD, image uploads, search/filter, reporting, nutrition, and category management (including creating, editing, deleting, and listing recipe categories for organizing and filtering recipes)
+- **Interaction Service**: Manages comments and likes on recipes
 
-## 📄 License
-MIT License – see [LICENSE](LICENSE)
-
----
-
-*Built with ❤️ by the GreenForked community* 
+**[Use Case Diagram](diagrams/use-case-overview.png)** 
