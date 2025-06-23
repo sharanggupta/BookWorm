@@ -34,3 +34,6 @@ buildHistory.xml
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Settings directory
+.settings/
