@@ -16,5 +16,8 @@
 - View recent/popular recipes and categories
 - Admin: Ban/warn/delete users, delete/moderate recipes, manage categories
 
-## Use Case Diagram
-- See [../../diagrams/use-case-overview.png](../../diagrams/use-case-overview.png) 
+## Use Case Diagrams
+- [Authentication & User Management](../../diagrams/use-case-authentication.png)
+- [Recipe Management](../../diagrams/use-case-recipe-management.png)
+- [Social Features](../../diagrams/use-case-social-features.png)
+- [Moderation & Reporting](../../diagrams/use-case-moderation.png) 

@@ -1,0 +1,8 @@
+@startuml
+actor User
+actor Admin
+
+User --> (Report Recipe)
+User --> (Report User)
+Admin --> (View Reports)
+@enduml 

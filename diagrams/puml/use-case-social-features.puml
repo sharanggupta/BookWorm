@@ -1,28 +1,16 @@
 @startuml
-actor Visitor
 actor User
-actor Blogger
-actor Admin
+actor Visitor
 
-User --> (Register/Login via Google)
-User --> (Edit Profile)
 User --> (Browse/Search Recipes)
 User --> (Like Recipe)
 User --> (Comment on Recipe)
 User --> (Delete Comment)
-User --> (Report Recipe)
-User --> (Report User)
 User --> (See Calories for Recipe)
 User --> (View Recipe Details)
 User --> (View Own Recipes)
 User --> (View Liked Recipes)
 User --> (View Popular/Recent Recipes)
 User --> (View Categories)
-Blogger --> (Add Recipe)
-Blogger --> (Edit Recipe)
-Blogger --> (Delete Recipe)
-Admin --> (Ban/Warn/Delete User)
-Admin --> (Delete/Moderate Recipe)
-Admin --> (View Reports)
 Visitor --> (Browse Recipes)
 @enduml 

@@ -29,7 +29,11 @@ This is a TDD Sandbox Project created as part of the Optivem Journal TDD in Lega
 - Nutrition analysis (calorie calculation via Nutritionix API)
 
 **Actors:** Visitor, User, Blogger, Admin  
-**[Use Case Diagram](diagrams/use-case-overview.png)**
+**Use Case Diagrams:**
+- [Authentication & User Management](diagrams/use-case-authentication.png)
+- [Recipe Management](diagrams/use-case-recipe-management.png)
+- [Social Features](diagrams/use-case-social-features.png)
+- [Moderation & Reporting](diagrams/use-case-moderation.png)
 
 ## External Systems
 - Google OAuth ([Google Identity](https://developers.google.com/identity)) – Authentication
@@ -97,9 +101,19 @@ GreenForked is a scalable, modern web application for vegan food lovers, blogger
 
 ![Architecture Diagram](diagrams/architecture-overview.png)
 
-**Use Case Overview**
+**Use Case Diagrams**
 
-![Use Case Diagram](diagrams/use-case-overview.png)
+Authentication & User Management:
+![Authentication Use Case](diagrams/use-case-authentication.png)
+
+Recipe Management:
+![Recipe Management Use Case](diagrams/use-case-recipe-management.png)
+
+Social Features:
+![Social Features Use Case](diagrams/use-case-social-features.png)
+
+Moderation & Reporting:
+![Moderation Use Case](diagrams/use-case-moderation.png)
 
 **ER Diagram**
 
@@ -114,4 +128,4 @@ GreenForked is a scalable, modern web application for vegan food lovers, blogger
 - **Recipe Service**: Manages recipe CRUD, image uploads, search/filter, reporting, nutrition, and category management (including creating, editing, deleting, and listing recipe categories for organizing and filtering recipes)
 - **Interaction Service**: Manages comments and likes on recipes
 
-**[Use Case Diagram](diagrams/use-case-overview.png)** 
+**[Use Case Diagrams](diagrams/use-case-authentication.png)** 

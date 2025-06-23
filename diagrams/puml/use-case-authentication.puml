@@ -1,0 +1,8 @@
+@startuml
+actor User
+actor Admin
+
+User --> (Register/Login via Google)
+User --> (Edit Profile)
+Admin --> (Ban/Warn/Delete User)
+@enduml 

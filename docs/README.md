@@ -73,9 +73,19 @@ Cost analysis and optimization:
 
 ![Architecture Diagram](../diagrams/architecture-overview.png)
 
-**Use Case Overview**
+**Use Case Diagrams**
 
-![Use Case Diagram](../diagrams/use-case-overview.png)
+Authentication & User Management:
+![Authentication Use Case](../diagrams/use-case-authentication.png)
+
+Recipe Management:
+![Recipe Management Use Case](../diagrams/use-case-recipe-management.png)
+
+Social Features:
+![Social Features Use Case](../diagrams/use-case-social-features.png)
+
+Moderation & Reporting:
+![Moderation Use Case](../diagrams/use-case-moderation.png)
 
 **ER Diagram**
 

@@ -1,0 +1,9 @@
+@startuml
+actor Blogger
+actor Admin
+
+Blogger --> (Add Recipe)
+Blogger --> (Edit Recipe)
+Blogger --> (Delete Recipe)
+Admin --> (Delete/Moderate Recipe)
+@enduml 

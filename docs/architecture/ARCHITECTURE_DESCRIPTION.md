@@ -33,8 +33,11 @@ GreenForked is a microservices-based vegan recipe platform, designed for scalabi
 ## Architecture Diagram
 See [../../diagrams/architecture-overview.png](../../diagrams/architecture-overview.png)
 
-## Use Case Diagram
-See [../../diagrams/use-case-overview.png](../../diagrams/use-case-overview.png)
+## Use Case Diagrams
+- [Authentication & User Management](../../diagrams/use-case-authentication.png)
+- [Recipe Management](../../diagrams/use-case-recipe-management.png)
+- [Social Features](../../diagrams/use-case-social-features.png)
+- [Moderation & Reporting](../../diagrams/use-case-moderation.png)
 
 ## ER Diagram
 See [../../diagrams/er-diagram.png](../../diagrams/er-diagram.png)
@@ -45,9 +48,19 @@ See [../../diagrams/er-diagram.png](../../diagrams/er-diagram.png)
 
 ![Architecture Diagram](../../diagrams/architecture-overview.png)
 
-**Use Case Overview**
+**Use Case Diagrams**
 
-![Use Case Diagram](../../diagrams/use-case-overview.png)
+Authentication & User Management:
+![Authentication Use Case](../../diagrams/use-case-authentication.png)
+
+Recipe Management:
+![Recipe Management Use Case](../../diagrams/use-case-recipe-management.png)
+
+Social Features:
+![Social Features Use Case](../../diagrams/use-case-social-features.png)
+
+Moderation & Reporting:
+![Moderation Use Case](../../diagrams/use-case-moderation.png)
 
 **ER Diagram**
 
