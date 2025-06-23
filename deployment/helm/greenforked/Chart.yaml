@@ -1,0 +1,4 @@
+apiVersion: v2
+name: greenforked
+version: 0.1.0
+description: GreenForked - A modern vegan recipe platform Helm chart 

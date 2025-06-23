@@ -1,0 +1,57 @@
+@startuml
+entity User {
+  *id : UUID
+  sub : String
+  email : String
+  image : String
+  bio : String
+  social : String
+}
+entity Recipe {
+  *id : UUID
+  recipeName : String
+  cuisine : String
+  prepTime : Int
+  serving : Int
+  description : String
+  images : String
+  ingredients : String
+  instructions : String
+  calories : Float
+  owner : UUID
+  categoryID : UUID
+  typename : String
+  isArchived : Boolean
+}
+entity Comment {
+  *id : UUID
+  recipeID : UUID
+  userID : UUID
+  content : String
+}
+entity Category {
+  *id : UUID
+  name : String
+}
+entity Report {
+  *id : UUID
+  userID : UUID
+  reportedUsers : String
+  count : Int
+  typename : String
+}
+entity Message {
+  *id : UUID
+  recipeID : UUID
+  userID : UUID
+  message : String
+  isRead : Boolean
+}
+User ||--o{ Recipe : owns
+User ||--o{ Comment : writes
+User ||--o{ Message : receives
+Recipe ||--o{ Comment : has
+Recipe ||--o{ Message : has
+Recipe }o--|| Category : categorized
+Report }o--|| User : reports
+@enduml 

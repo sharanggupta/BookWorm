@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "greenforked.fullname" . }}-config
+  namespace: {{ .Values.namespace.name }}
+  labels:
+    {{- include "greenforked.labels" . | nindent 4 }}
+data:
+  # Database configurations
+  POSTGRES_HOST: "{{ include "greenforked.fullname" . }}-postgresql"
+  POSTGRES_PORT: "5432"
+  POSTGRES_DB: {{ .Values.db.postgres.db | quote }}
+
+  # Application configurations
+  SPRING_PROFILES_ACTIVE: {{ .Values.config.springProfilesActive | quote }}
+  LOG_LEVEL: {{ .Values.config.logLevel | quote }}
+
+  # Frontend configuration
+  NEXT_PUBLIC_USER_API_URL: {{ .Values.userService.url | quote }}
+  NEXT_PUBLIC_RECIPE_API_URL: {{ .Values.recipeService.url | quote }}
+  NEXT_PUBLIC_INTERACTION_API_URL: {{ .Values.interactionService.url | quote }}
+  NEXT_PUBLIC_CATEGORY_API_URL: {{ .Values.categoryService.url | quote }} 

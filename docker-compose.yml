@@ -1,0 +1,111 @@
+version: '3.8'
+
+services:
+  user-service:
+    build:
+      context: ./services/user-service
+      dockerfile: Dockerfile
+    container_name: greenforked-user-service
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/greenforked
+      SPRING_DATASOURCE_USERNAME: greenforked
+      SPRING_DATASOURCE_PASSWORD: greenforked123
+    depends_on:
+      - postgres
+    networks:
+      - greenforked-network
+
+  recipe-service:
+    build:
+      context: ./services/recipe-service
+      dockerfile: Dockerfile
+    container_name: greenforked-recipe-service
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/greenforked
+      SPRING_DATASOURCE_USERNAME: greenforked
+      SPRING_DATASOURCE_PASSWORD: greenforked123
+    depends_on:
+      - postgres
+    networks:
+      - greenforked-network
+
+  interaction-service:
+    build:
+      context: ./services/interaction-service
+      dockerfile: Dockerfile
+    container_name: greenforked-interaction-service
+    ports:
+      - "8083:8083"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/greenforked
+      SPRING_DATASOURCE_USERNAME: greenforked
+      SPRING_DATASOURCE_PASSWORD: greenforked123
+    depends_on:
+      - postgres
+    networks:
+      - greenforked-network
+
+  category-service:
+    build:
+      context: ./services/category-service
+      dockerfile: Dockerfile
+    container_name: greenforked-category-service
+    ports:
+      - "8084:8084"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/greenforked
+      SPRING_DATASOURCE_USERNAME: greenforked
+      SPRING_DATASOURCE_PASSWORD: greenforked123
+    depends_on:
+      - postgres
+    networks:
+      - greenforked-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: greenforked-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_USER_API_URL: http://localhost:8081
+      NEXT_PUBLIC_RECIPE_API_URL: http://localhost:8082
+      NEXT_PUBLIC_INTERACTION_API_URL: http://localhost:8083
+      NEXT_PUBLIC_CATEGORY_API_URL: http://localhost:8084
+    depends_on:
+      - user-service
+      - recipe-service
+      - interaction-service
+      - category-service
+    networks:
+      - greenforked-network
+
+  postgres:
+    image: postgres:15
+    container_name: greenforked-postgres
+    environment:
+      POSTGRES_DB: greenforked
+      POSTGRES_USER: greenforked
+      POSTGRES_PASSWORD: greenforked123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - greenforked-network
+
+volumes:
+  postgres_data:
+
+networks:
+  greenforked-network:
+    driver: bridge 

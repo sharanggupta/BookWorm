@@ -1,0 +1,55 @@
+# GreenForked Architecture Description
+
+## Overview
+GreenForked is a microservices-based vegan recipe platform, designed for scalability, maintainability, and a modern user experience. The system is composed of four main backend services, a React frontend, and cloud-based media storage.
+
+## Microservices
+- **User Service**: Handles authentication (Google OAuth), user registration, profile management, and admin actions.
+- **Recipe Service**: Manages recipe CRUD, image uploads, search/filter, and reporting.
+- **Interaction Service**: Manages comments and likes on recipes.
+- **Category Service**: Handles recipe categories (CRUD, admin only).
+
+## Data Storage
+- **PostgreSQL**: Each service owns its tables.
+- **Media Storage**: **Cloudflare Images** for all recipe/user images (no video support).
+  - Predictable, low-cost pricing
+  - Built-in CDN and image optimization
+  - Direct upload API for user-generated content
+  - No egress fees or bandwidth surprises
+  - Easy integration with React/Spring Boot
+
+## Frontend
+- **React (TypeScript)**: Clean, green-themed UI inspired by Vegan Manna.
+- **Tailwind CSS**: For rapid, consistent styling.
+
+## Color Palette
+- Primary Green: #2ecc71
+- Accent Green: #27ae60
+- Background: #ffffff
+- Text: #222222
+- Subtle Gray: #f7f7f7
+- CTA/Highlight: #00b894
+- Error/Alert: #e17055
+
+## Architecture Diagram
+See [../architecture-overview.png](../architecture-overview.png)
+
+## Use Case Diagram
+See [../use-case-overview.png](../use-case-overview.png)
+
+## ER Diagram
+See [../er-diagram.png](../er-diagram.png)
+
+## 🖼️ Key Diagrams
+
+**Architecture Overview**
+
+![Architecture Diagram](../architecture-overview.png)
+
+**Use Case Overview**
+
+![Use Case Diagram](../use-case-overview.png)
+
+**ER Diagram**
+
+![ER Diagram](../er-diagram.png) 
