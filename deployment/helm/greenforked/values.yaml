@@ -39,10 +39,6 @@ ingress:
           pathType: Prefix
           service: interaction-service
           port: 8083
-        - path: /category
-          pathType: Prefix
-          service: category-service
-          port: 8084
   tls:
     - secretName: greenforked-tls
       hosts:
@@ -58,8 +54,6 @@ nodePort:
     port: 30082
   interactionService:
     port: 30083
-  categoryService:
-    port: 30084
 
 db:
   postgres:
@@ -71,6 +65,20 @@ db:
     password: greenforked123
     persistence:
       size: 10Gi
+
+  redis:
+    enabled: true
+    image: redis:7-alpine
+    port: 6379
+    persistence:
+      size: 5Gi
+    resources:
+      requests:
+        memory: 64Mi
+        cpu: 50m
+      limits:
+        memory: 128Mi
+        cpu: 100m
 
 services:
   userService:
@@ -145,10 +153,10 @@ services:
       initialDelaySeconds: 60
       periodSeconds: 30
 
-  categoryService:
+workers:
+  imageProcessor:
     enabled: true
     replicaCount: 1
-    port: 8084
     resources:
       requests:
         memory: 128Mi
@@ -159,13 +167,36 @@ services:
     livenessProbe:
       httpGet:
         path: /actuator/health
-        port: 8084
+        port: 8080
       initialDelaySeconds: 120
       periodSeconds: 60
     readinessProbe:
       httpGet:
         path: /actuator/health/readiness
-        port: 8084
+        port: 8080
+      initialDelaySeconds: 60
+      periodSeconds: 30
+
+  nutritionWorker:
+    enabled: true
+    replicaCount: 1
+    resources:
+      requests:
+        memory: 128Mi
+        cpu: 100m
+      limits:
+        memory: 256Mi
+        cpu: 200m
+    livenessProbe:
+      httpGet:
+        path: /actuator/health
+        port: 8080
+      initialDelaySeconds: 120
+      periodSeconds: 60
+    readinessProbe:
+      httpGet:
+        path: /actuator/health/readiness
+        port: 8080
       initialDelaySeconds: 60
       periodSeconds: 30
 
@@ -199,7 +230,6 @@ config:
   frontendUserApiUrl: http://localhost:8081
   frontendRecipeApiUrl: http://localhost:8082
   frontendInteractionApiUrl: http://localhost:8083
-  frontendCategoryApiUrl: http://localhost:8084
 
 secrets:
   jwtSecret: {{JWT_SECRET}} 

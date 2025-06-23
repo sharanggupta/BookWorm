@@ -129,12 +129,21 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Build and push category-service image
+      - name: Build and push image-processor worker
         uses: docker/build-push-action@v5
         with:
-          context: ./services/category-service
+          context: ./workers/image-processor
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/category-service:${{ steps.meta.outputs.version }}
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/image-processor:${{ steps.meta.outputs.version }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Build and push nutrition-worker
+        uses: docker/build-push-action@v5
+        with:
+          context: ./workers/nutrition-worker
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/nutrition-worker:${{ steps.meta.outputs.version }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 

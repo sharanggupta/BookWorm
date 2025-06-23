@@ -28,7 +28,6 @@
         <module>services/user-service</module>
         <module>services/recipe-service</module>
         <module>services/interaction-service</module>
-        <module>services/category-service</module>
     </modules>
 
     <dependencyManagement>

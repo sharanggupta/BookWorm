@@ -41,11 +41,14 @@ MIT License – see [LICENSE](LICENSE)
 - Nutritionix API ([nutritionix.com](https://www.nutritionix.com/business/api)) – Nutrition analysis
 
 ## System Architecture Style
-Frontend + Microservice Backend
+Event-Driven Microservices with Message Queues
 
 ## Tech Stack
 - **Frontend:** React (TypeScript), Tailwind CSS
 - **Backend:** Spring Boot (Java 17+), PostgreSQL, REST APIs
+- **Message Queue:** Redis for asynchronous processing
+- **Search:** Elasticsearch for fast recipe search and filtering
+- **Background Workers:** Image processing, nutrition analysis, notifications, moderation
 - **Media Storage:** Cloudflare Images
 - **Nutrition Analysis:** Nutritionix API
 - **Deployment:** Docker, Kubernetes, GitHub Actions

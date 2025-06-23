@@ -13,8 +13,11 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/greenforked
       SPRING_DATASOURCE_USERNAME: greenforked
       SPRING_DATASOURCE_PASSWORD: greenforked123
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
     depends_on:
       - postgres
+      - redis
     networks:
       - greenforked-network
 
@@ -30,8 +33,11 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/greenforked
       SPRING_DATASOURCE_USERNAME: greenforked
       SPRING_DATASOURCE_PASSWORD: greenforked123
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
     depends_on:
       - postgres
+      - redis
     networks:
       - greenforked-network
 
@@ -47,25 +53,11 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/greenforked
       SPRING_DATASOURCE_USERNAME: greenforked
       SPRING_DATASOURCE_PASSWORD: greenforked123
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
     depends_on:
       - postgres
-    networks:
-      - greenforked-network
-
-  category-service:
-    build:
-      context: ./services/category-service
-      dockerfile: Dockerfile
-    container_name: greenforked-category-service
-    ports:
-      - "8084:8084"
-    environment:
-      SPRING_PROFILES_ACTIVE: docker
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/greenforked
-      SPRING_DATASOURCE_USERNAME: greenforked
-      SPRING_DATASOURCE_PASSWORD: greenforked123
-    depends_on:
-      - postgres
+      - redis
     networks:
       - greenforked-network
 
@@ -80,12 +72,59 @@ services:
       NEXT_PUBLIC_USER_API_URL: http://localhost:8081
       NEXT_PUBLIC_RECIPE_API_URL: http://localhost:8082
       NEXT_PUBLIC_INTERACTION_API_URL: http://localhost:8083
-      NEXT_PUBLIC_CATEGORY_API_URL: http://localhost:8084
     depends_on:
       - user-service
       - recipe-service
       - interaction-service
-      - category-service
+    networks:
+      - greenforked-network
+
+  # Message Queue
+  redis:
+    image: redis:7-alpine
+    container_name: greenforked-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    networks:
+      - greenforked-network
+
+  # Background Workers
+  image-processor:
+    build:
+      context: ./workers/image-processor
+      dockerfile: Dockerfile
+    container_name: greenforked-image-processor
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/greenforked
+      SPRING_DATASOURCE_USERNAME: greenforked
+      SPRING_DATASOURCE_PASSWORD: greenforked123
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - greenforked-network
+
+  nutrition-worker:
+    build:
+      context: ./workers/nutrition-worker
+      dockerfile: Dockerfile
+    container_name: greenforked-nutrition-worker
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/greenforked
+      SPRING_DATASOURCE_USERNAME: greenforked
+      SPRING_DATASOURCE_PASSWORD: greenforked123
+    depends_on:
+      - redis
+      - postgres
     networks:
       - greenforked-network
 
@@ -105,6 +144,7 @@ services:
 
 volumes:
   postgres_data:
+  redis_data:
 
 networks:
   greenforked-network:

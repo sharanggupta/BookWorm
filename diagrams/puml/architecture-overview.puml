@@ -1,26 +1,66 @@
 @startuml
 !define RECTANGLE class
+
+' Frontend
 RECTANGLE ReactFrontend as "React Frontend\n(Tailwind, Google OAuth)"
+
+' Core Services
 RECTANGLE UserService as "User Service\n(Auth, Profile, Admin)"
 RECTANGLE RecipeService as "Recipe Service\n(Recipes, Images, Search, Report, Categories)"
 RECTANGLE InteractionService as "Interaction Service\n(Comments, Likes)"
+
+' Message Queue
+RECTANGLE MessageQueue as "Redis Queue\n(Simple & Fast)"
+
+' Background Workers
+RECTANGLE ImageProcessor as "Image Processor\n(Resize, Optimize, Metadata)"
+RECTANGLE NutritionWorker as "Nutrition Worker\n(Nutritionix API)"
+RECTANGLE SearchIndexer as "Search Indexer\n(Elasticsearch)"
+RECTANGLE NotificationWorker as "Notification Worker\n(Email, Push)"
+RECTANGLE ModerationWorker as "Moderation Worker\n(Report Processing)"
+
+' External Services
 RECTANGLE PostgreSQL as "PostgreSQL"
-RECTANGLE MediaStorage as "S3/Cloudinary\n(Images Only)"
+RECTANGLE MediaStorage as "Cloudflare Images\n(Images Only)"
 RECTANGLE GoogleOAuth as "Google OAuth"
 RECTANGLE NutritionixAPI as "Nutritionix API"
+RECTANGLE Elasticsearch as "Elasticsearch\n(Search Index)"
 
+' Frontend connections
 ReactFrontend --> UserService : REST API
 ReactFrontend --> RecipeService : REST API
 ReactFrontend --> InteractionService : REST API
 ReactFrontend --> GoogleOAuth : OAuth Login
 
+' Service to database
 UserService --> PostgreSQL
 RecipeService --> PostgreSQL
 InteractionService --> PostgreSQL
 UserService --> GoogleOAuth : Token Verification
 
+' Synchronous operations
 RecipeService --> MediaStorage : Image Upload
 ReactFrontend --> MediaStorage : Image Fetch
-RecipeService --> NutritionixAPI : Nutrition Analysis
+
+' Asynchronous operations via queues
+RecipeService --> MessageQueue : Image Processing Job
+RecipeService --> MessageQueue : Nutrition Analysis Job
+RecipeService --> MessageQueue : Search Index Update
+InteractionService --> MessageQueue : Notification Job
+RecipeService --> MessageQueue : Moderation Job
+
+' Background workers
+MessageQueue --> ImageProcessor : Process Images
+MessageQueue --> NutritionWorker : Analyze Nutrition
+MessageQueue --> SearchIndexer : Update Search Index
+MessageQueue --> NotificationWorker : Send Notifications
+MessageQueue --> ModerationWorker : Process Reports
+
+' Worker connections
+ImageProcessor --> MediaStorage : Store Processed Images
+NutritionWorker --> NutritionixAPI : Nutrition Analysis
+SearchIndexer --> Elasticsearch : Update Index
+NotificationWorker --> PostgreSQL : Store Notifications
+ModerationWorker --> PostgreSQL : Update Moderation Status
 
 @enduml 
