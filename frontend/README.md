@@ -70,7 +70,6 @@ Create a `.env.local` file in the frontend directory:
 NEXT_PUBLIC_USER_API_URL=http://localhost:8081
 NEXT_PUBLIC_RECIPE_API_URL=http://localhost:8082
 NEXT_PUBLIC_INTERACTION_API_URL=http://localhost:8083
-NEXT_PUBLIC_CATEGORY_API_URL=http://localhost:8084
 ```
 
 > **Note:** Next.js requires environment variables to be prefixed with `NEXT_PUBLIC_` to be exposed to the browser.
@@ -80,9 +79,8 @@ NEXT_PUBLIC_CATEGORY_API_URL=http://localhost:8084
 The frontend integrates with the following backend services:
 
 - **User Service** – Authentication and user management
-- **Recipe Service** – Recipe CRUD, image upload, search, reporting
+- **Recipe Service** – Recipe CRUD, image upload, search, reporting, and category management
 - **Interaction Service** – Comments and likes
-- **Category Service** – Recipe categories
 
 ## Development Guidelines
 
